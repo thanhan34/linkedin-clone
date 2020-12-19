@@ -9,7 +9,10 @@ import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import Post from './Post';
 import { db } from './firebase';
 import firebase from "firebase"
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
 function Feed() {
+    const user = useSelector(selectUser)
     const [input, setInput] = useState("")
     const [posts, setPosts] = useState([])
     useEffect(() => {
@@ -27,10 +30,10 @@ function Feed() {
     const sendPost = (e) => {
         e.preventDefault()
         db.collection("posts").add({
-            name: "An Doan",
-            description: "This a text",
+            name: user.displayName,
+            description: user.email,
             message: input,
-            photoUrl: "",
+            photoUrl: user.photoUrl,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
 
         })
@@ -64,7 +67,7 @@ function Feed() {
                     />
                 ))
             }
-            <Post name="An Doan" description="Fullstack Developer" message="Welcome to my LinkedIn Profile" photoUrl="https://scontent.fbne6-1.fna.fbcdn.net/v/t1.0-9/131022939_10218351254361490_7080673836792265944_o.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=wuYmydjGaQgAX-Rmdj8&_nc_ht=scontent.fbne6-1.fna&oh=16cf6ae33507989312741b5e716db5c4&oe=6001E261" />
+
         </div>
     )
 }
