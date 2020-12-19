@@ -17,10 +17,6 @@ function Header() {
         dispath(logout())
         auth.signOut()
     }
-
-
-
-
     return (
         <div className="header">
             <div className="header__left">
@@ -36,7 +32,9 @@ function Header() {
                 <HeaderOption title="Jobs" Icon={BusinessCenterIcon} />
                 <HeaderOption title="Messaging" Icon={ChatIcon} />
                 <HeaderOption title="Notifications" Icon={NotificationsIcon} />
-                <HeaderOption avatar={user.photoUrl} title="Me"
+                <HeaderOption
+                    avatar={true}
+                    title="Me"
                     onClick={logoutOfApp} />
             </div>
         </div>
